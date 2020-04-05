@@ -8,7 +8,7 @@ class TodoItems extends Component {
         return (
             <ul>
                 {
-                    items.map((item)=>{ return <TodoItem key={item.id} item={item} />})
+                    items.map((item)=>{ return <TodoItem key={item.todoId} item={item} />})
                 }
             </ul>
         );

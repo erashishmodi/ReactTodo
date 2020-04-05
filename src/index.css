@@ -6,6 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.todo-app{
+  margin: 0 auto;
+  width: 600px;
+  border: 1px solid #696969;
+  padding: 5px;  
+}
 .todo-item-completed {
   border: 1px solid #65ff6b;
   background-color: #b1ff56;

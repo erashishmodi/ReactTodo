@@ -1,28 +1,63 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import TodoItems from './Components/ToDo/TodoItems';
+import AddTodoItem from './Components/ToDo/AddTodoItem';
 
 class App extends Component {
   constructor(props) {
-    super(props);    
-    this.state={todoItems:[]};
-  }; 
- 
+    super(props);
+    this.state = {
+      todoItems: []
+    };
+  };
+
   componentDidMount() {
-    axios({
-      method: 'get',
-      url: ""
-    })
-    .then((response)=>{
-      console.log(response);
-      this.setState({todoItems:response});
+    this.loadTodoData();
+  };
+
+  loadTodoData() {
+    // axios({
+    //   method: 'get',
+    //   url: ""
+    // })
+    // .then((response)=>{
+    //   console.log(response);
+    //   this.setState({todoItems:response});
+    // });
+    this.setState({
+      todoItems: [
+        {
+          "todoId": 1,
+          "title": "Website",
+          "completed": true
+        }
+      ]
     });
   };
 
-  render() {   
+  addTodoItem = (item) => {
+    console.log(item);
+    this.setState({
+      todoItems: [
+        ...this.state.todoItems,
+        item
+      ]
+    });
+    // axios.post("", item)
+    // .then((response) => 
+    // {
+    //   this.loadTodoData();
+    //   console.log(response);
+    // },(error) => {
+    //   console.log(error);
+    // });
+  }
+
+  render() {
     return (
-      <div>
-        <TodoItems items={this.state.todoItems}/>
+      <div className="todo-app">
+        <AddTodoItem addTodoItem={this.addTodoItem} />
+        <TodoItems items={this.state.todoItems} />
       </div>
     );
   }
