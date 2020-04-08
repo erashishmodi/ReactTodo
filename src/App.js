@@ -4,6 +4,8 @@ import TodoItems from './Components/ToDo/TodoItems';
 import AddTodoItem from './Components/ToDo/AddTodoItem';
 
 class App extends Component {
+
+  url="http://103.235.105.76/plesk-site-preview/greenlifehealthcare.seminalwealth.com/todo";
   constructor(props) {
     super(props);
     this.state = {
@@ -16,41 +18,35 @@ class App extends Component {
   };
 
   loadTodoData() {
-    // axios({
-    //   method: 'get',
-    //   url: ""
-    // })
-    // .then((response)=>{
-    //   console.log(response);
-    //   this.setState({todoItems:response});
-    // });
-    this.setState({
-      todoItems: [
-        {
-          "todoId": 1,
-          "title": "Website",
-          "completed": true
-        }
-      ]
+    axios({
+      method: 'get',
+      url: this.url,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then((response)=>{
+      console.log(response);
+      this.setState({todoItems:response.data});
     });
   };
+  
 
   addTodoItem = (item) => {
-    console.log(item);
-    this.setState({
-      todoItems: [
-        ...this.state.todoItems,
-        item
-      ]
+    if(item.title.trim() != "")
+    {
+      axios.post(this.url, item)
+    .then((response) => 
+    {
+      this.loadTodoData();
+      console.log(response);
+    },(error) => {
+      console.log(error);
     });
-    // axios.post("", item)
-    // .then((response) => 
-    // {
-    //   this.loadTodoData();
-    //   console.log(response);
-    // },(error) => {
-    //   console.log(error);
-    // });
+    }else{
+      alert("Please fill title compulsary.");
+        }
+    
   }
 
   render() {
