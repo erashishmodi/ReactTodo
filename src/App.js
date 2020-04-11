@@ -5,7 +5,7 @@ import AddTodoItem from './Components/ToDo/AddTodoItem';
 
 class App extends Component {
 
-  url="http://103.235.105.76/plesk-site-preview/greenlifehealthcare.seminalwealth.com/todo";
+  url = "http://103.235.105.76/plesk-site-preview/greenlifehealthcare.seminalwealth.com/todo";
   constructor(props) {
     super(props);
     this.state = {
@@ -20,33 +20,21 @@ class App extends Component {
   loadTodoData() {
     axios({
       method: 'get',
-      url: this.url,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    }).then((response)=>{
+      url: this.url
+    }).then((response) => {
       console.log(response);
-      this.setState({todoItems:response.data});
+      this.setState({ todoItems: response.data });
     });
   };
-  
 
   addTodoItem = (item) => {
-    if(item.title.trim() != "")
-    {
-      axios.post(this.url, item)
-    .then((response) => 
-    {
-      this.loadTodoData();
-      console.log(response);
-    },(error) => {
-      console.log(error);
-    });
-    }else{
-      alert("Please fill title compulsary.");
-        }
-    
+    axios.post(this.url, item)
+      .then((response) => {
+        this.loadTodoData();
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   render() {

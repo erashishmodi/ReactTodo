@@ -29,3 +29,7 @@ body {
   margin: 3px 0;
   color: #d89ae2;
 }
+.todo-item-error{
+  color: #F44336;
+  font-size: 13px;
+}
